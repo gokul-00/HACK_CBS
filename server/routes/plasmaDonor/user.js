@@ -59,12 +59,12 @@ user.post("/otpinit", async (req, res) => {
 //register and login
 user.post("/", async (req, res) => {
 	try {
-		let { name, city, state, contactNo, bloodGroup, otp } = req.body;
+		let { contactNo, otp } = req.body;
 
 		const donor = await PlasmaDonor.findOne({ contactNo });
 
 		if (donor === null) {
-			res.status(400).json({ message: "OTP Invalid" });
+			res.status(400).json({ message: "OTP Invalid / Contact No. Empty" });
 		} else {
 			if (donor.verified && otp == donor.otp.value) {
 				if (checkOtpExpiry(donor.otp.expireAt)) {
@@ -76,31 +76,20 @@ user.post("/", async (req, res) => {
 					);
 					const token = await createJWTtoken(donor);
 					res.status(200).json({
-						name,
-						city,
-						state,
 						contactNo,
-						bloodGroup,
 						token,
 					});
 				}
 			} else {
-				if (otp == donor.otp.value) {
+				if (otp == donor.otp.value && contactNo != "") {
 					if (checkOtpExpiry(donor.otp.expireAt)) {
 						res.status(400).json({ message: "OTP Expired" });
 					} else {
-						if (!name || !city || !state || !bloodGroup)
-							res.status(400).json({ message: "Fill all fields" });
-
 						req.body.verified = true;
 						await PlasmaDonor.updateOne(
 							{ contactNo },
 							{
 								$set: {
-									name: name,
-									city: city,
-									state: state,
-									bloodGroup: bloodGroup,
 									otp: { value: otp, expireAt: Date.now() - 1 },
 									verified: true,
 								},
@@ -117,13 +106,12 @@ user.post("/", async (req, res) => {
 							}
 						);
 					}
+				} else if (contactNo == "") {
+					res.status(400).json({ message: "Enter Mobile No." });
 				} else {
 					res.status(400).json({ message: "OTP Invalid" });
 				}
 			}
-		}
-		if (!name || !city || !state || !contactNo || !bloodGroup) {
-			return res.status(400).json({ message: "Fill all fields" });
 		}
 	} catch (error) {
 		console.log(error);
