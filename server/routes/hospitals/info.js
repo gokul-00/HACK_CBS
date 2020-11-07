@@ -1,5 +1,6 @@
 const info = require('express').Router();
 const Hospital = require('../../models/Hospital')
+const { jwtVerify } = require('../../middlewares/jwt');
 
 // GET - /getInfo?city={}
 info.get('/getInfo', async (req, res) => {
@@ -14,7 +15,7 @@ info.get('/getInfo', async (req, res) => {
 })
 
 //update hospital info (plasmaFacility,bedsAvailable)
-info.put('/update', async (req, res) => {
+info.put('/update', jwtVerify, async (req, res) => {
     try {
         const { plasmaFacility, bedsAvailable } = req.body;
         const hospitalId = req.jwt_payload.id;

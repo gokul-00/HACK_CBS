@@ -14,7 +14,6 @@ info.get('/getinfo', async (req, res) => {
     }
 })
 
-// update donor info 
-// POST route
+
 
 module.exports = info;
