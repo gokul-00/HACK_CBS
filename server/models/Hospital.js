@@ -7,11 +7,11 @@ const HospitalSchema = new Schema({
         required: true
     },
     city: String,
-    State: String,
+    state: String,
     contactNo: Number,
     password: String,
     plasmaFacility: Boolean,
-    bedAvailable: Number
+    bedsAvailable: Number
 })
 
 module.exports = model('Hospital', HospitalSchema);
