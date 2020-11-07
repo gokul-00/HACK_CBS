@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Chart from './Chart/Chart'
 import Cards from './Cards/Cards'
 import { fetchData } from '../api/index';
-import styles from './index.module.css';
+import styles from './home.module.css';
 
 const Index = () => {
     const [data,setData] = useState({})
