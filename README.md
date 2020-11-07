@@ -18,3 +18,11 @@ FRONTEND:
   npm i
 
   npm start
+
+
+DATABASE:
+
+Run mongo.exe in command line
+
+Database creation:
+use covid19
