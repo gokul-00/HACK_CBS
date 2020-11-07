@@ -7,6 +7,8 @@ BACKEND:
   npm i
 
   Copy the contents of .env.example file into .env in config folder.
+  
+  nodemon index.js
 
 
 FRONTEND:
