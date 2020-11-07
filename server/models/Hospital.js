@@ -9,6 +9,7 @@ const HospitalSchema = new Schema({
     city: String,
     state: String,
     contactNo: Number,
+    email: String,
     password: String,
     plasmaFacility: Boolean,
     bedsAvailable: Number
