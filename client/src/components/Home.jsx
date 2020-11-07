@@ -16,10 +16,10 @@ const Index = () => {
       },
     [])
     return (
-        <div className={styles.container}>
-            <Cards data={data} />
-            <Chart data={data} /> 
-        </div>
+      <div className={styles.container}>
+        <Cards data={data} />
+        <Chart data={data} /> 
+      </div>
     )
 }
 
