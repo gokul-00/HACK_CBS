@@ -7,8 +7,8 @@ const { createJWTtoken } = require('../../middlewares/jwt');
 
 register.post('/', async (req, res) => {
     try {
-        let { name, city, state, contactNo, password } = req.body
-        if (!name || !city || !state || !contactNo || !password) {
+        let { name, city, state, contactNo, password, email } = req.body
+        if (!name || !city || !state || !contactNo || !password || !email) {
             return res.status(400).json({ message: "Fill all fields" })
         }
         const hospital = await Hospital.findOne({ contactNo })
