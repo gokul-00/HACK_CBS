@@ -5,7 +5,7 @@ import { fetchDailyData } from '../../api';
 
 import styles from './Chart.module.css';
 
-const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
+const Chart = ({ data: { confirmed, recovered, deaths } }) => {
   const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
         }}
         options={{
           legend: { display: false },
-          title: { display: true, text: `Current state in ${country}` },
+          title: { display: true, text: `Current state in India` },
         }}
       />
     ) : null

@@ -1,31 +1,20 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
-import { Cards, Chart } from './components';
-import { fetchData } from './api/';
-import styles from './App.module.css';
+import { Container } from '@material-ui/core'
 
+import Home from './components/index.jsx';
+import NavBar from './components/NavBar/NavBar.jsx';
 
-class App extends React.Component {
-  state = {
-    data: {},
-  }
-
-  async componentDidMount() {
-    const data = await fetchData();
-
-    this.setState({ data });
-  }
-
-  render() {
-    const { data, country } = this.state;
-
-    return (
-      <div className={styles.container}>
-        <Cards data={data} />
-        <Chart data={data} country={country} /> 
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <Router>
+      <Container>
+        <NavBar />
+        <Route path='/' component={Home}/>
+      </Container>
+    </Router>
+  );
 }
 
 export default App;
