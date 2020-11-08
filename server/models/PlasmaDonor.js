@@ -8,6 +8,7 @@ const PlasmaDonorSchema = new Schema({
 	city: String,
 	state: String,
 	contactNo: Number,
+	address: String,
 	bloodGroup: {
 		type: String,
 		enum: ["A-", "A+", "B-", "B+", "O+", "O-", "AB+", "AB-"],
