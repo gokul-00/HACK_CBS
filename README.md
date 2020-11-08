@@ -8,6 +8,8 @@ This project is done for HackCBS 3.0.
 
 `git clone https://github.com/gokul-00/HACK_CBS.git`
 
+use dev branch
+
 ### Backend:
 
   `cd server`
