@@ -1,28 +1,34 @@
 # HACK_CBS
 
-BACKEND:
+This project is done for HackCBS 3.0.
 
-  cd server
+## Project Setup
 
-  npm i
+### Clone the project
 
-  Copy the contents of .env.example file into .env in config folder.
+`git clone https://github.com/gokul-00/HACK_CBS.git`
+
+### Backend:
+
+  `cd server`
+
+  `npm i`
+
+   Copy the contents of .env.example file into .env in config folder.
   
-  nodemon index.js
+  `nodemon index.js`
+
+### Frontend:
+
+  `cd client`
+
+  `npm i`
+
+  `npm start`
 
 
-FRONTEND:
+### Database:
 
-  cd client
+Run `mongo.exe` file in command line
 
-  npm i
-
-  npm start
-
-
-DATABASE:
-
-Run mongo.exe in command line
-
-Database creation:
-use covid19
+Create database manually in cmd: `use covid19`
