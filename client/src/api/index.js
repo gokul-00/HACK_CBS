@@ -11,3 +11,24 @@ export const fetchData = async () => {
   }
 };
 
+
+export const hospitalData = async () => {
+  const url = `http://localhost:5000/api/hospital/info/getInfo`;
+  try {
+    const {data} = await axios.get(url);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+
+export const hospitalRegister = async(data) => {
+  const url = `http://localhost:5000/auth/hospital/register`;
+  try {
+    const response = await axios.post(url,data)
+    localStorage.setItem("Token", response.data.token)
+  } catch (error) {
+    console.log(error)
+  }
+}

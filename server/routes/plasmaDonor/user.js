@@ -125,7 +125,7 @@ user.post("/", async (req, res) => {
 //update user info
 user.post("/updateinfo", jwtVerify, async (req, res) => {
 	try {
-		const newInfo = deleteEmpty(req.body);
+		const newInfo = req.body;
 		const contactNo = req.jwt_payload.contactNo;
 
 		await PlasmaDonor.updateOne(

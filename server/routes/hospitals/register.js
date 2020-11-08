@@ -14,11 +14,11 @@ register.post('/', async (req, res) => {
         const hospital = await Hospital.findOne({ contactNo })
         if (hospital == null) {
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
-            const newHospital = new Hospital({ name, city, state, contactNo, password: hashedPassword })
+            const newHospital = new Hospital({ name, city, state, email, contactNo, password: hashedPassword })
             await newHospital.save()
             const token = await createJWTtoken(newHospital)
             res.status(200).json({
-                name, city, state, contactNo, token
+                name, city, email, state: newHospital.state, contactNo, token
             })
 
         } else {

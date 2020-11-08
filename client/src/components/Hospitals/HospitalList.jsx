@@ -1,35 +1,42 @@
-import React from 'react'
-import { Grid, Paper, makeStyles} from '@material-ui/core'
+import React, {useState, useEffect} from 'react'
+import { Grid, makeStyles, CircularProgress} from '@material-ui/core'
+import { hospitalData } from '../../api/index'
+import Hospital from './Hospital'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
       flexGrow: 1,
     },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-      margin: 5
+    grid: {
+        marginBottom: 10
     },
 }));
 
 function HospitalList() {
     const classes = useStyles();
+    const [list, setList] = useState([])
+
+    useEffect(
+        () => {
+          async function fetchdata(){
+            const response = await hospitalData()
+            setList([ ...response ]);
+          }
+          fetchdata()
+        },
+    [])
     return (
         <div className={classes.root}>
             <Grid container>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
+                {list !== [] ? (
+                    list.map((hospital) => (
+                        <Grid key={hospital._id} item xs={12} sm={6} md={6} className={classes.grid}>
+                          <Hospital hospital={hospital} />
+                        </Grid>
+                    ))
+                ):(
+                    <CircularProgress />
+                )}
             </Grid>
         </div>
     )

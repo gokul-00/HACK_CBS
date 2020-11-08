@@ -13,7 +13,7 @@ login.post('/', async (req, res) => {
             if (await bcrypt.compare(password, hospital.password)) {
                 const token = await createJWTtoken(hospital)
                 res.status(200).json({
-                    contactNo,
+                    hospital:hospital,
                     token
                 })
             }

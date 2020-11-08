@@ -1,18 +1,20 @@
 const { Schema, model } = require('mongoose');
 
 const HospitalSchema = new Schema({
-    name: {
-        type: String,
-        trim: true,
-        required: true
-    },
+    name: String,
     city: String,
     state: String,
     contactNo: Number,
     email: String,
     password: String,
-    plasmaFacility: Boolean,
-    bedsAvailable: Number
+    plasmaFacility: {
+        type:Boolean,
+        default:false
+    },
+    bedsAvailable: {
+        type:Number,
+        default:0
+    }
 })
 
 module.exports = model('Hospital', HospitalSchema);
