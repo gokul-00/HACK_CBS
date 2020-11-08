@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const { jwtVerify } = require('./middlewares/jwt')
 
 //DB config
 const mongo_uri = process.env.MONGO_URI;
@@ -23,7 +22,6 @@ app.use(bodyParser.json({ limit: '20mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 app.use(cors());
 
-app.use('/api/', jwtVerify)
 app.use('/api/hospital/info', require('./routes/hospitals/info'));
 app.use('/api/plasmaDonor/info', require('./routes/plasmaDonor/info'));
 app.use('/auth/hospital/register', require('./routes/hospitals/register'));
