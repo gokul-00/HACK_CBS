@@ -1,9 +1,11 @@
 const user = require("express").Router();
 const PlasmaDonor = require("../../models/PlasmaDonor");
-const { createJWTtoken } = require("../../middlewares/jwt");
+const { createJWTtoken, jwtVerify } = require("../../middlewares/jwt");
 const { sendSms } = require("../../middlewares/twilio");
 const { otpGenerator } = require("../../helper/otpgenerator");
 const { checkOtpExpiry } = require("../../helper/checkotp");
+const { deleteEmpty } = require("../../helper/deletempty");
+const jwt = require("../../middlewares/jwt");
 
 //otpinit
 user.post("/otpinit", async (req, res) => {
@@ -113,6 +115,30 @@ user.post("/", async (req, res) => {
 				}
 			}
 		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ message: "Server error. Try again later" });
+	}
+});
+
+//update user info
+user.post("/updateinfo", jwtVerify, async (req, res) => {
+	try {
+		const newInfo = deleteEmpty(req.body);
+		const contactNo = req.jwt_payload.contactNo;
+
+		await PlasmaDonor.updateOne(
+			{ contactNo },
+			{ $set: newInfo },
+			(error, result) => {
+				if (error) {
+					res.status(500).json({ message: "Server error. Try again later" });
+				} else {
+					console.log(result);
+					res.status(200).json({ message: "User Information Updated" });
+				}
+			}
+		);
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: "Server error. Try again later" });
