@@ -32,3 +32,4 @@ This project is done for HackCBS 3.0.
 Run `mongo.exe` file in command line
 
 Create database manually in cmd: `use covid19`
+

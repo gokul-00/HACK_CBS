@@ -121,6 +121,7 @@ user.post("/", async (req, res) => {
 	}
 });
 
+
 //update user info
 user.post("/updateinfo", jwtVerify, async (req, res) => {
 	try {
@@ -144,5 +145,6 @@ user.post("/updateinfo", jwtVerify, async (req, res) => {
 		res.status(500).json({ message: "Server error. Try again later" });
 	}
 });
+
 
 module.exports = user;
